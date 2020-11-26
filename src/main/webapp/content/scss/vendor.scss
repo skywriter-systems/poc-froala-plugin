@@ -9,4 +9,26 @@ eg $input-color: red;
 // Import Bootstrap source files from node_modules
 @import '~bootstrap/scss/bootstrap';
 
+@import '~froala-editor/css/froala_editor.pkgd.min.css';
+@import '~froala-editor/css/froala_style.min.css';
+
+// froala plugins
+@import '~froala-editor/css/plugins/table.min.css';
+@import '~froala-editor/css/plugins/char_counter.min.css';
+@import '~froala-editor/css/plugins/code_view.min.css';
+@import '~froala-editor/css/plugins/colors.min.css';
+@import '~froala-editor/css/plugins/draggable.min.css';
+// @import '~froala-editor/css/plugins/embedly.min.css';
+@import '~froala-editor/css/plugins/emoticons.min.css';
+@import '~froala-editor/css/plugins/file.min.css';
+@import '~froala-editor/css/plugins/fullscreen.min.css';
+@import '~froala-editor/css/plugins/help.min.css';
+@import '~froala-editor/css/plugins/image.min.css';
+@import '~froala-editor/css/plugins/image_manager.min.css';
+// @import '~froala-editor/css/plugins/image_tui.min.css';
+@import '~froala-editor/css/plugins/line_breaker.min.css';
+@import '~froala-editor/css/plugins/quick_insert.min.css';
+@import '~froala-editor/css/plugins/special_characters.min.css';
+// @import '~froala-editor/css/plugins/spell_checker.min.css';
+@import '~froala-editor/css/plugins/video.min.css';
 /* jhipster-needle-scss-add-vendor JHipster will add new css style */

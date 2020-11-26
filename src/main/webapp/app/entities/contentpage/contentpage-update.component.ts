@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -14,6 +15,11 @@ import { ContentpageService } from './contentpage.service';
 })
 export class ContentpageUpdateComponent implements OnInit {
   isSaving = false;
+  public options: Object = {
+    placeholderText: '',
+    charCounterCount: false,
+    quickInsertTags: [''],
+  };
 
   editForm = this.fb.group({
     id: [],
