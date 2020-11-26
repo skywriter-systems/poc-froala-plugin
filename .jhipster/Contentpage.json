@@ -1,0 +1,25 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "contenthtml",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20201126080222",
+  "dto": "no",
+  "searchEngine": false,
+  "service": "no",
+  "entityTableName": "contentpage",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": false,
+  "pagination": "pagination"
+}
