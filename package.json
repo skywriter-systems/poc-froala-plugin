@@ -24,6 +24,7 @@
     "@ngx-translate/http-loader": "4.0.0",
     "angular-froala-wysiwyg": "^3.2.3",
     "bootstrap": "4.4.1",
+    "froala-editor-paragraph-format-extended-plugin": "^0.2.0",
     "moment": "2.24.0",
     "ng-jhipster": "0.13.0",
     "ngx-cookie-service": "3.0.4",

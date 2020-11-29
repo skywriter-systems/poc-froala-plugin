@@ -32,3 +32,6 @@ eg $input-color: red;
 // @import '~froala-editor/css/plugins/spell_checker.min.css';
 @import '~froala-editor/css/plugins/video.min.css';
 /* jhipster-needle-scss-add-vendor JHipster will add new css style */
+
+@import '../css/froala-paragraph-format.css';
+@import '../css/froala-paragraph-style.css';

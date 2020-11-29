@@ -36,4 +36,6 @@ import 'froala-editor/js/plugins/special_characters.min.js';
 import 'froala-editor/js/plugins/url.min.js';
 import 'froala-editor/js/plugins/video.min.js';
 import 'froala-editor/js/plugins/word_paste.min.js';
+import 'froala-editor-paragraph-format-extended-plugin/dist/paragraph_format_extended.umd.min.js';
+
 require('../manifest.webapp');
