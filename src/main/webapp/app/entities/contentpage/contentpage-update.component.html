@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <form name="editForm" role="form" id='froala-form' novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-contentpage-heading" jhiTranslate="froalaApp.contentpage.home.createOrEditLabel">Create or edit a Contentpage</h2>
 
             <div>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group froala">
                     <label class="form-control-label" jhiTranslate="froalaApp.contentpage.contenthtml" for="field_contenthtml">Contenthtml</label>
                     <textarea type="text" class="form-control" name="contenthtml" id="field_contenthtml" [froalaEditor]='options'
                            formControlName="contenthtml"></textarea>

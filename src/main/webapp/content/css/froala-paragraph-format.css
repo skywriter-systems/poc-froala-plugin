@@ -1,12 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700|Lora|Playfair+Display:700i,900');
 
-html,
+form > * > html,
 body {
   margin: 0;
   width: 100%;
 }
 
-h1,
+form > * > h1,
+h2,
+p,
+i,
+a {
+  color: rgba(0, 0, 0, 0.84);
+  text-rendering: optimizeLegibility;
+}
+form > * > h1,
 h2,
 p,
 i,
@@ -16,15 +24,13 @@ a,
   color: rgba(0, 0, 0, 0.84);
   text-rendering: optimizeLegibility;
 }
-
-h1 {
+form > * > h1 {
   font-family: 'Playfair Display', serif;
   font-size: 48px;
   text-align: left;
   margin-bottom: 8px;
 }
-
-h2 {
+.fr-more-toolbar > * .fr-dropdown-list > * > h2 {
   font-family: 'Lato', sans-serif;
   font-size: 26px;
   font-weight: 700;
@@ -33,24 +39,22 @@ h2 {
   text-align: left;
   line-height: 34.5px;
   letter-spacing: -0.45px;
-  color: red;
+  color: red !important;
 }
-
-p,
+.fr-toolbar > * > .fr-dropdown-list > * > p,
 i,
-a {
+.fr-command {
   margin-top: 21px;
   font-family: 'Lora';
   font-size: 21px;
   letter-spacing: -0.03px;
   line-height: 1.58;
 }
-
-a {
+form > * > a {
   text-decoration: underline;
 }
 
-blockquote {
+form > * > blockquote {
   font-family: 'Playfair Display', serif;
   font-size: 30px;
   font-style: italic;
@@ -62,20 +66,17 @@ blockquote {
   color: rgba(0, 0, 0, 0.68);
   padding: 0 0 0 50px;
 }
-
-code {
+form > * > code {
   font-size: 18px;
   background: rgba(0, 0, 0, 0.05);
   border-radius: 2px;
   padding: 3px 5px;
 }
-
-mark,
+form > * > mark,
 .highlighted {
   background: #7dffb3;
 }
-
-.first-letter {
+form > * > .first-letter {
   overflow-wrap: break-word;
   font-family: 'Playfair Display', serif;
   font-size: 60px;
@@ -85,13 +86,20 @@ mark,
   float: left;
   margin: 0px 7px 0 -5px;
 }
-
-.subtitle {
+form > * > .subtitle {
   font-family: 'Lato', sans-serif;
   color: rgba(0, 0, 0, 0.54);
   margin: 0 0 24px 0;
 }
-
-::selection {
+form > * > ::selection {
   background-color: lavender;
+}
+.class1 {
+  text-align: center;
+  color: red;
+}
+.class2 {
+  font-weight: 300;
+  font-size: 16px;
+  color: green;
 }

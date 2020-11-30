@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { IContentpage, Contentpage } from 'app/shared/model/contentpage.model';
 import { ContentpageService } from './contentpage.service';
 
+import * as $ from 'jquery';
+
 @Component({
   selector: 'jhi-contentpage-update',
   templateUrl: './contentpage-update.component.html',
@@ -19,17 +21,18 @@ export class ContentpageUpdateComponent implements OnInit {
     placeholderText: 'Enter yur content here',
     paragraphFormatSelection: true,
     paragraphDefaultSelection: 'Normal',
+    paragraphMultipleStyles: false,
     paragraphFormat: {
       N: 'Normal',
       h1: 'Heading 1',
       h2: 'Heading 2',
       code: 'code',
     },
-
     paragraphStyles: {
       class1: 'Class 1',
       class2: 'Class 2',
     },
+
     charCounterCount: true,
     // quickInsertTags: [''],
     toolbarButtons: {
@@ -48,6 +51,7 @@ export class ContentpageUpdateComponent implements OnInit {
           'inlineClass',
           'inlineStyle',
           'clearFormatting',
+          'paragraphFormatExtended',
         ],
       },
       moreParagraph: {
@@ -98,6 +102,13 @@ export class ContentpageUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ contentpage }) => {
       this.updateForm(contentpage);
+    });
+
+    $(document).ready(() => {
+      // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
+      $('#froala-form').append(
+        $('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/froala-paragraph-format.css')
+      );
     });
   }
 
