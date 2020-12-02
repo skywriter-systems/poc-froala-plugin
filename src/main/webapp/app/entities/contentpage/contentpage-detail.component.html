@@ -13,7 +13,7 @@
                     <span>{{ contentpage.title }}</span>
                 </dd>
                 <dt><span jhiTranslate="froalaApp.contentpage.contenthtml">Contenthtml</span></dt>
-                <dd [innerHTML]='sanitizer.bypassSecurityTrustHtml(contentpage.contenthtml)'>
+                <dd [innerHTML]='secureCntent(contentpage.contenthtml)'>
                     <!-- <span>{{ contentpage.contenthtml }}</span>
                     <span [innerHTML]='contentpage.contenthtml'></span> -->
                 </dd>

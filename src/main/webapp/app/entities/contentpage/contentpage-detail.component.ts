@@ -16,6 +16,10 @@ export class ContentpageDetailComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ contentpage }) => (this.contentpage = contentpage));
   }
 
+  public secureCntent(value: any): any {
+    return this.sanitizer.bypassSecurityTrustHtml(value);
+  }
+
   previousState(): void {
     window.history.back();
   }

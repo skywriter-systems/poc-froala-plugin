@@ -55,6 +55,10 @@ export class ContentpageComponent implements OnInit, OnDestroy {
     this.registerChangeInContentpages();
   }
 
+  public secureCntent(value: any): any {
+    return this.sanitizer.bypassSecurityTrustHtml(value);
+  }
+
   protected handleNavigation(): void {
     combineLatest(this.activatedRoute.data, this.activatedRoute.queryParamMap, (data: Data, params: ParamMap) => {
       const page = params.get('page');
