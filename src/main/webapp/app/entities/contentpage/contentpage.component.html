@@ -32,7 +32,7 @@
                 <tr *ngFor="let contentpage of contentpages ;trackBy: trackId">
                     <td><a [routerLink]="['/contentpage', contentpage.id, 'view']">{{ contentpage.id }}</a></td>
                     <td>{{ contentpage.title }}</td>
-                    <td><span [innerHTML]='contentpage.contenthtml'></span></td>
+                    <td><span [innerHTML]='sanitizer.bypassSecurityTrustHtml(contentpage.contenthtml)'></span></td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

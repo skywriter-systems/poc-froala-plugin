@@ -10,6 +10,7 @@ import { IContentpage } from 'app/shared/model/contentpage.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { ContentpageService } from './contentpage.service';
 import { ContentpageDeleteDialogComponent } from './contentpage-delete-dialog.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'jhi-contentpage',
@@ -30,7 +31,8 @@ export class ContentpageComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected sanitizer: DomSanitizer
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {

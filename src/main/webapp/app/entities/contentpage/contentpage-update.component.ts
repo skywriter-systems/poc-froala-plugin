@@ -10,6 +10,7 @@ import { IContentpage, Contentpage } from 'app/shared/model/contentpage.model';
 import { ContentpageService } from './contentpage.service';
 
 import * as $ from 'jquery';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'jhi-contentpage-update',
@@ -19,22 +20,21 @@ export class ContentpageUpdateComponent implements OnInit {
   isSaving = false;
   public options: Object = {
     placeholderText: 'Enter yur content here',
-    paragraphFormatSelection: true,
+    // paragraphFormatSelection: true,
     paragraphDefaultSelection: 'Normal',
-    paragraphMultipleStyles: false,
-    paragraphFormat: {
-      N: 'Normal',
-      h1: 'Heading 1',
-      h2: 'Heading 2',
-      code: 'code',
-    },
+    useClasses: false,
+    // paragraphFormat: {
+    //   N: 'Normal',
+    //   h1: 'Heading 1',
+    //   h2: 'Heading 2',
+    //   code: 'code',
+    // },
     paragraphStyles: {
       class1: 'Class 1',
       class2: 'Class 2',
     },
 
     charCounterCount: true,
-    // quickInsertTags: [''],
     toolbarButtons: {
       moreText: {
         buttons: [
@@ -51,7 +51,6 @@ export class ContentpageUpdateComponent implements OnInit {
           'inlineClass',
           'inlineStyle',
           'clearFormatting',
-          'paragraphFormatExtended',
         ],
       },
       moreParagraph: {
@@ -63,7 +62,7 @@ export class ContentpageUpdateComponent implements OnInit {
           'alignJustify',
           'formatOL',
           'formatUL',
-          'paragraphFormat',
+          'paragraphFormatExtended',
           'paragraphStyle',
           'lineHeight',
           'outdent',
@@ -89,6 +88,13 @@ export class ContentpageUpdateComponent implements OnInit {
         buttons: ['undo', 'redo', 'fullscreen', 'print', 'getPDF', 'spellChecker', 'selectAll', 'html', 'help'],
       },
     },
+    paragraphFormatExtended: [
+      { title: 'Normal' },
+      { tag: 'h1', title: 'Heading 1' },
+      { tag: 'h2', title: 'Heading 2' },
+      { tag: 'h2', class: 'fr-text-bordered', title: 'Header 2 bordered' },
+      { tag: 'pre', id: 'code', title: 'Code' },
+    ],
   };
 
   editForm = this.fb.group({
@@ -97,7 +103,12 @@ export class ContentpageUpdateComponent implements OnInit {
     contenthtml: [],
   });
 
-  constructor(protected contentpageService: ContentpageService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected contentpageService: ContentpageService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    public sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ contentpage }) => {
@@ -106,7 +117,7 @@ export class ContentpageUpdateComponent implements OnInit {
 
     $(document).ready(() => {
       // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
-      $('#froala-form').append(
+      return $('form').append(
         $('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/froala-paragraph-format.css')
       );
     });
