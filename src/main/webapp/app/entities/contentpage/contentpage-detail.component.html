@@ -1,3 +1,15 @@
+<form name="viewForm" role="form" id='froala-form' [formGroup]="viewForm">
+    <div class="form-group">
+        <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+        <!-- <span>{{ contentpage.title }}</span> -->
+    </div>
+
+</form>
+<div>
+    <!-- <span>{{title}}</span> -->
+</div>
+<hr>
+
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="contentpage">
@@ -18,15 +30,11 @@
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/contentpage', contentpage.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/contentpage', contentpage.id, 'edit']" class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>
