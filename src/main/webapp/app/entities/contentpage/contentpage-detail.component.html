@@ -1,12 +1,12 @@
 <form name="viewForm" role="form" id='froala-form' [formGroup]="viewForm">
     <div class="form-group">
         <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-        <!-- <span>{{ contentpage.title }}</span> -->
+        Value: {{ viewForm.value | json}}
     </div>
 
 </form>
 <div>
-    <!-- <span>{{title}}</span> -->
+    <span>{{contentpage.title}}</span>
 </div>
 <hr>
 
