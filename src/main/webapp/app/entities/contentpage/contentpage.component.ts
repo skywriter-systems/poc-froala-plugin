@@ -4,7 +4,7 @@ import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
 import { Subscription, combineLatest } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import * as $ from 'jquery';
 import { IContentpage } from 'app/shared/model/contentpage.model';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
@@ -53,6 +53,11 @@ export class ContentpageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.handleNavigation();
     this.registerChangeInContentpages();
+    $(document).ready(() => {
+      return $('span').append(
+        $('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/froala-paragraph-format.css')
+      );
+    });
   }
 
   public secureCntent(value: any): any {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { IContentpage } from 'app/shared/model/contentpage.model';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'jhi-contentpage-detail',
@@ -14,6 +15,11 @@ export class ContentpageDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ contentpage }) => (this.contentpage = contentpage));
+    $(document).ready(() => {
+      return $('dd').append(
+        $('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/froala-paragraph-format.css')
+      );
+    });
   }
 
   public secureCntent(value: any): any {

@@ -31,6 +31,12 @@
   },
   "defaultProject": "froala",
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "83aea186-bae4-4e11-95dc-c630cc9cb2a9"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "less"
+    }
   }
 }

@@ -19,8 +19,16 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ContentpageUpdateComponent implements OnInit {
   isSaving = false;
   public options: Object = {
+    events: {
+      // 'click': () => {
+      //   console.log(this['editForm'].value.contenthtml);
+      //   $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
+      // },
+    },
+    contenteditable: false,
     placeholderText: 'Enter yur content here',
-    // paragraphFormatSelection: true,
+    paragraphFormatSelection: true,
+    paragraphMultipleStyles: true,
     paragraphDefaultSelection: 'Normal',
     useClasses: false,
     // paragraphFormat: {
@@ -89,11 +97,11 @@ export class ContentpageUpdateComponent implements OnInit {
       },
     },
     paragraphFormatExtended: [
-      { title: 'Normal' },
+      { tag: 'N', title: 'Normal' },
       { tag: 'h1', title: 'Heading 1' },
       { tag: 'h2', title: 'Heading 2' },
-      { tag: 'h2', class: 'fr-text-bordered', title: 'Header 2 bordered' },
-      { tag: 'pre', id: 'code', title: 'Code' },
+      { tag: 'code', title: 'Code' },
+      // { tag: 'h2', class: 'fr-text-bordered', title: 'H-2 bordered' },
     ],
   };
 
@@ -117,6 +125,8 @@ export class ContentpageUpdateComponent implements OnInit {
 
     $(document).ready(() => {
       // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
+      // $('#field_contenthtml').froalaEditor({});
+      // $('#field_contenthtml').froalaEditor('edit.off');
       return $('form').append(
         $('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/froala-paragraph-format.css')
       );
