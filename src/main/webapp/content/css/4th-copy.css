@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Lora|Playfair+Display:700i,900');
-
-html,
+@import url('https://fonts.googleapis.com/css?family=Montserrat&family=Open+Sans&display=swap&family=Lato:400,700|Lora|Playfair+Display:700i,900');
+.froala > * html,
 body {
   margin: 0;
   width: 100%;
 }
-
-h1,
+.froala > * h1,
 h2,
 p,
 i,
@@ -16,16 +14,14 @@ a,
   color: rgba(0, 0, 0, 0.84);
   text-rendering: optimizeLegibility;
 }
-
-h1 {
-  font-family: Playfair Display, serif;
+.froala > * h1 {
+  font-family: Open Sans, sans-serif;
   font-size: 48px;
   text-align: left;
   margin-bottom: 8px;
 }
-
-h2 {
-  font-family: Lato, sans-serif;
+.froala > * h2 {
+  font-family: Open Sans, sans-serif;
   font-size: 26px;
   font-weight: 700;
   padding: 0;
@@ -33,12 +29,10 @@ h2 {
   text-align: left;
   line-height: 34.5px;
   letter-spacing: -0.45px;
-  color: red;
+  color: rgb(233, 80, 157);
 }
-
-p,
-i,
-a {
+.froala > * p,
+i {
   margin-top: 21px;
   font-family: Lora;
   font-size: 21px;
@@ -46,12 +40,16 @@ a {
   line-height: 1.58;
 }
 
-a {
+.froala > * a {
   text-decoration: underline;
+  margin-top: 21px;
+  font-family: Lora;
+  font-size: 21px;
+  letter-spacing: -0.03px;
+  line-height: 1.58;
 }
-
-blockquote {
-  font-family: Playfair Display, serif;
+.froala > * blockquote {
+  font-family: Open Sans, sans-serif;
   font-size: 30px;
   font-style: italic;
   letter-spacing: -0.36px;
@@ -62,22 +60,19 @@ blockquote {
   color: rgba(0, 0, 0, 0.68);
   padding: 0 0 0 50px;
 }
-
-code {
+.froala > * code {
   font-size: 18px;
   background: rgba(0, 0, 0, 0.05);
   border-radius: 2px;
   padding: 3px 5px;
 }
-
-mark,
+.froala > * mark,
 .highlighted {
   background: #7dffb3;
 }
-
-.first-letter {
+.froala > * .first-letter {
   overflow-wrap: break-word;
-  font-family: Playfair Display, serif;
+  font-family: Open Sans, sans-serif;
   font-size: 60px;
   line-height: 60px;
   display: block;
@@ -85,13 +80,11 @@ mark,
   float: left;
   margin: 0px 7px 0 -5px;
 }
-
-.subtitle {
-  font-family: Lato, sans-serif;
+.froala > * .subtitle {
+  font-family: Open Sans, sans-serif;
   color: rgba(0, 0, 0, 0.54);
   margin: 0 0 24px 0;
 }
-
-::selection {
+.froala > * ::selection {
   background-color: lavender;
 }

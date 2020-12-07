@@ -32,7 +32,10 @@
                 <tr *ngFor="let contentpage of contentpages ;trackBy: trackId">
                     <td><a [routerLink]="['/contentpage', contentpage.id, 'view']">{{ contentpage.id }}</a></td>
                     <td>{{ contentpage.title }}</td>
-                    <td><span class="froala" [innerHTML]='secureCntent(contentpage.contenthtml)'></span></td>
+                    <td *ngIf="contentpage.contenthtml" >
+                        <!-- {{secureCntent(contentpage.contenthtml)}} -->
+                        <span class="froala" [innerHTML]='secureCntent(contentpage.contenthtml)'></span>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

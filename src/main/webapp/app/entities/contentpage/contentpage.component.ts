@@ -25,7 +25,7 @@ export class ContentpageComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
-
+  code: any;
   constructor(
     protected contentpageService: ContentpageService,
     protected activatedRoute: ActivatedRoute,
@@ -54,13 +54,21 @@ export class ContentpageComponent implements OnInit, OnDestroy {
     this.handleNavigation();
     this.registerChangeInContentpages();
     $(document).ready(() => {
-      return $('span').append(
-        $('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/froala-paragraph-format.css')
-      );
+      return $('span').append($('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/3rd-copy.css'));
     });
+    // setTimeout(() => {
+    //   document.querySelectorAll("[fr-original-class]").forEach( (element) => {
+    //     // element.outerHTML = element.outerHTML.replace('fr-original-class' , 'class')
+    //     const x = element.getAttribute('fr-original-class');
+    //     element.setAttribute('class', `${x}`);
+    //     element.removeAttribute('fr-original-class');
+    //   });
+    // }, 300);
   }
-
   public secureCntent(value: any): any {
+    if (value.includes('fr-original-class')) {
+      return this.sanitizer.bypassSecurityTrustHtml(value.replace(/fr-original-/, ''));
+    }
     return this.sanitizer.bypassSecurityTrustHtml(value);
   }
 

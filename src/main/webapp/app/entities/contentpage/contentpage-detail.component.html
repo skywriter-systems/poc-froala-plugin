@@ -13,7 +13,7 @@
                     <span>{{ contentpage.title }}</span>
                 </dd>
                 <dt><span jhiTranslate="froalaApp.contentpage.contenthtml">Contenthtml</span></dt>
-                <dd class="froala" [innerHTML]='secureCntent(contentpage.contenthtml)'>
+                <dd class="froala" [outerHTML]='secureCntent(contentpage.contenthtml)'>
                     <!-- <span>{{ contentpage.contenthtml }}</span>
                     <span [innerHTML]='contentpage.contenthtml'></span> -->
                 </dd>

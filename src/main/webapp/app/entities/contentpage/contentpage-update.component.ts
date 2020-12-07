@@ -13,6 +13,7 @@ import * as $ from 'jquery';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import FroalaEditor from 'froala-editor';
+require('froala-editor-paragraph-format-extended-plugin');
 
 @Component({
   selector: 'jhi-contentpage-update',
@@ -21,18 +22,8 @@ import FroalaEditor from 'froala-editor';
 export class ContentpageUpdateComponent implements OnInit {
   isSaving = false;
   public options: Object = {
-    events: {
-      // 'click': () => {
-      //   console.log(this['editForm'].value.contenthtml);
-      //   $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
-      // },
-    },
-    contenteditable: false,
-    placeholderText: 'Enter yur content here',
-    paragraphFormatSelection: true,
-    paragraphMultipleStyles: true,
-    paragraphDefaultSelection: 'Normal',
     useClasses: false,
+    placeholderText: 'Enter yur content here',
     // paragraphFormat: {
     //   N: 'Normal',
     //   h1: 'Heading 1',
@@ -72,6 +63,7 @@ export class ContentpageUpdateComponent implements OnInit {
           'alignJustify',
           'formatOL',
           'formatUL',
+          // 'paragraphFormat',
           'paragraphFormatExtended',
           'paragraphStyle',
           'myDropdown',
@@ -126,54 +118,40 @@ export class ContentpageUpdateComponent implements OnInit {
       this.updateForm(contentpage);
     });
 
+    $(document).ready(() => {
+      // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
+      // $('#field_contenthtml').froalaEditor({});
+      // $('#field_contenthtml').froalaEditor('edit.off');
+      return $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/3rd-copy.css'));
+    });
+
     FroalaEditor.DefineIcon('myDropdown', { NAME: 'cog', SVG_KEY: 'cogs' });
 
     // Define a dropdown button.
     FroalaEditor.RegisterCommand('myDropdown', {
       // Button title.
-      title: 'Advanced options',
+      title: 'choose css',
       type: 'dropdown',
       focus: false,
       undo: false,
       refreshAfterCallback: true,
       options: {
-        '../../../content/css/froala-paragraph-format.css': 'Option 1',
-        '../../../content/css/froala-paragraph-format2.css': 'Option 2',
+        '../../../content/css/3rd-copy.css': '3rd-copy',
+        '../../../content/css/4th-copy.css': '4th-copy',
       },
       // Callback.
       callback(cmd: any, val: any, params: any): void {
         // The current context is the editor instance.
-        console.error(this.html.get(), val);
-
         $(document).ready(() => {
           // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
           // $('#field_contenthtml').froalaEditor({});
           // $('#field_contenthtml').froalaEditor('edit.off');
           $('form > link').remove();
-          return $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', val));
+          $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', val));
+          $('.froala').append($('<link rel="stylesheet" type="text/css" />').attr('href', val));
         });
+        console.error(this.html.get(), val);
       },
-
-      // Called when the dropdown button state might have changed.
-      refresh($btn: any): void {
-        // The current context is the editor instance.
-        console.error(this.selection.element(), $btn);
-      },
-
-      // Called when the dropdown is shown.
-      refreshOnShow($btn: any, $dropdown: any): void {
-        // The current context is the editor instance.
-        console.error('do refresh when show', $btn, $dropdown);
-      },
-    });
-
-    $(document).ready(() => {
-      // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
-      // $('#field_contenthtml').froalaEditor({});
-      // $('#field_contenthtml').froalaEditor('edit.off');
-      return $('form').append(
-        $('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/froala-paragraph-format.css')
-      );
     });
   }
 
