@@ -16,9 +16,7 @@ export class ContentpageDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ contentpage }) => (this.contentpage = contentpage));
     $(document).ready(() => {
-      return $('dd').append(
-        $('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/froala-paragraph-format.css')
-      );
+      return $('dd').append($('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/3th-copy.css'));
     });
   }
 

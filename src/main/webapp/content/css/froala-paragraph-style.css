@@ -1,10 +1,10 @@
 .class1 {
-  text-align: center;
-  color: red;
+  text-align: center !important;
+  color: red !important;
 }
 
 .class2 {
-  font-weight: 300;
-  font-size: 16px;
-  color: green;
+  font-weight: 300 !important;
+  font-size: 16px !important;
+  color: green !important;
 }

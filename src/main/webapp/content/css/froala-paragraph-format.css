@@ -40,6 +40,7 @@ body {
   /* font-size: 48px; */
   text-align: left;
   margin-bottom: 8px;
+  color: #7f7dff;
 }
 
 .fr-more-toolbar > * .fr-dropdown-list > * > code > * {

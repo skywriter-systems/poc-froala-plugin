@@ -54,10 +54,19 @@ export class ContentpageComponent implements OnInit, OnDestroy {
     this.handleNavigation();
     this.registerChangeInContentpages();
     $(document).ready(() => {
-      return $('span').append(
-        $('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/froala-paragraph-format.css')
-      );
+      return $('span').append($('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/3th-copy.css'));
     });
+    setTimeout(() => {
+      document.querySelectorAll('[fr-original-class]').forEach(element => {
+        // console.log(element.getAttribute('fr-original-class'));
+        const x: any = element.getAttribute('fr-original-class');
+        element.setAttribute('class', `${x}`);
+        console.log(element);
+
+        // element.removeAttribute('fr-original-class');
+        // console.log(element.getAttribute('class'));
+      });
+    }, 5000);
   }
 
   public secureCntent(value: any): any {

@@ -20,12 +20,12 @@ export class ContentpageUpdateComponent implements OnInit {
   isSaving = false;
   public options: Object = {
     events: {
-      // 'click': () => {
-      //   console.log(this['editForm'].value.contenthtml);
-      //   $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
-      // },
+      'html.get': () => {
+        if (this['editForm'].value.contenthtml) {
+          this['editForm'].value.contenthtml.replace('fr-original-', '');
+        }
+      },
     },
-    contenteditable: false,
     placeholderText: 'Enter yur content here',
     paragraphFormatSelection: true,
     paragraphMultipleStyles: true,
@@ -41,7 +41,6 @@ export class ContentpageUpdateComponent implements OnInit {
       class1: 'Class 1',
       class2: 'Class 2',
     },
-
     charCounterCount: true,
     toolbarButtons: {
       moreText: {
@@ -127,9 +126,7 @@ export class ContentpageUpdateComponent implements OnInit {
       // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
       // $('#field_contenthtml').froalaEditor({});
       // $('#field_contenthtml').froalaEditor('edit.off');
-      return $('form').append(
-        $('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/froala-paragraph-format.css')
-      );
+      return $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/3th-copy.css'));
     });
   }
 
