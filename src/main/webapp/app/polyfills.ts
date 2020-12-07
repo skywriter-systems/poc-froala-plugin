@@ -42,4 +42,7 @@ import 'froala-editor-paragraph-format-extended-plugin/dist/paragraph_format_ext
 
 import 'froala-editor/js/plugins/inline_class.min.js';
 import 'froala-editor/js/plugins/inline_style.min.js';
+
+import 'froala-editor/js/froala_editor.pkgd.min.js';
+
 require('../manifest.webapp');

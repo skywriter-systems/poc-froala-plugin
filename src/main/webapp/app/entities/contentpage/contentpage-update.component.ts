@@ -12,6 +12,8 @@ import { ContentpageService } from './contentpage.service';
 import * as $ from 'jquery';
 import { DomSanitizer } from '@angular/platform-browser';
 
+import FroalaEditor from 'froala-editor';
+
 @Component({
   selector: 'jhi-contentpage-update',
   templateUrl: './contentpage-update.component.html',
@@ -72,6 +74,7 @@ export class ContentpageUpdateComponent implements OnInit {
           'formatUL',
           'paragraphFormatExtended',
           'paragraphStyle',
+          'myDropdown',
           'lineHeight',
           'outdent',
           'indent',
@@ -121,6 +124,47 @@ export class ContentpageUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ contentpage }) => {
       this.updateForm(contentpage);
+    });
+
+    FroalaEditor.DefineIcon('myDropdown', { NAME: 'cog', SVG_KEY: 'cogs' });
+
+    // Define a dropdown button.
+    FroalaEditor.RegisterCommand('myDropdown', {
+      // Button title.
+      title: 'Advanced options',
+      type: 'dropdown',
+      focus: false,
+      undo: false,
+      refreshAfterCallback: true,
+      options: {
+        '../../../content/css/froala-paragraph-format.css': 'Option 1',
+        '../../../content/css/froala-paragraph-format2.css': 'Option 2',
+      },
+      // Callback.
+      callback(cmd: any, val: any, params: any): void {
+        // The current context is the editor instance.
+        console.error(this.html.get(), val);
+
+        $(document).ready(() => {
+          // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
+          // $('#field_contenthtml').froalaEditor({});
+          // $('#field_contenthtml').froalaEditor('edit.off');
+          $('form > link').remove();
+          return $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', val));
+        });
+      },
+
+      // Called when the dropdown button state might have changed.
+      refresh($btn: any): void {
+        // The current context is the editor instance.
+        console.error(this.selection.element(), $btn);
+      },
+
+      // Called when the dropdown is shown.
+      refreshOnShow($btn: any, $dropdown: any): void {
+        // The current context is the editor instance.
+        console.error('do refresh when show', $btn, $dropdown);
+      },
     });
 
     $(document).ready(() => {
