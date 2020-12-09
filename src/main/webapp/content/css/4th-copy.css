@@ -4,6 +4,7 @@ body {
   margin: 0;
   width: 100%;
 }
+/*
 .froala > * h1,
 h2,
 p,
@@ -14,6 +15,7 @@ a,
   color: rgba(0, 0, 0, 0.84);
   text-rendering: optimizeLegibility;
 }
+*/
 .froala > * h1 {
   font-family: Open Sans, sans-serif;
   font-size: 48px;

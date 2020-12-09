@@ -30,6 +30,17 @@ public class Contentpage implements Serializable {
     @Column(name = "contenthtml")
     private String contenthtml;
 
+    @Column(name = "contenthtmllink")
+    private String contenthtmllink;
+
+    public String getContenthtmllink() {
+        return contenthtmllink;
+    }
+
+    public void setContenthtmllink(String contenthtmllink) {
+        this.contenthtmllink = contenthtmllink;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;

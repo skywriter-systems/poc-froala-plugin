@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/no-this-alias */
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -13,6 +14,7 @@ import * as $ from 'jquery';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import FroalaEditor from 'froala-editor';
+import { element } from 'protractor';
 require('froala-editor-paragraph-format-extended-plugin');
 
 @Component({
@@ -105,6 +107,8 @@ export class ContentpageUpdateComponent implements OnInit {
     title: [null, [Validators.required]],
     contenthtml: [],
   });
+  currentHtml: any;
+  contenthtmlLink: any;
 
   constructor(
     protected contentpageService: ContentpageService,
@@ -126,7 +130,7 @@ export class ContentpageUpdateComponent implements OnInit {
     });
 
     FroalaEditor.DefineIcon('myDropdown', { NAME: 'cog', SVG_KEY: 'cogs' });
-
+    const self = this;
     // Define a dropdown button.
     FroalaEditor.RegisterCommand('myDropdown', {
       // Button title.
@@ -141,25 +145,40 @@ export class ContentpageUpdateComponent implements OnInit {
       },
       // Callback.
       callback(cmd: any, val: any, params: any): void {
-        // The current context is the editor instance.
+        const newSS = document.createElement('link');
+        newSS.rel = 'stylesheet';
+        newSS.href = val;
+        newSS.type = 'text/css';
         $(document).ready(() => {
           // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
           // $('#field_contenthtml').froalaEditor({});
           // $('#field_contenthtml').froalaEditor('edit.off');
           $('form > link').remove();
           $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', val));
-          $('.froala').append($('<link rel="stylesheet" type="text/css" />').attr('href', val));
+
+          setTimeout(() => {
+            self.currentHtml = this.html.get();
+            self.contenthtmlLink = this.html
+              .get()
+              .replace(/\s*style=(["'])(.*?)\1/gim, '')
+              .replace(/<\//gi, `  <link rel="stylesheet" href=${val} type="text/css" /></`);
+
+            // console.log(this.html.get().replace(/\s*style=(["'])(.*?)\1/gmi, '').replace(/<\//ig, `  <link rel="stylesheet" href=${val} type="text/css" /></`));
+            // console.log(this.html.get().replace(/style='[^']'/, '').replace(/<\//ig, `  <link rel="stylesheet" href=${val} type="text/css" /></`));
+            // console.log(this.html.get().replace(/fr-original-style=["'](.*)["']/, '').replcae(/.$/));
+            // console.log(this.html.get().replace(/<\//ig, `  <link rel="stylesheet" href=${val} type="text/css" /></`));
+            // console.log(self.currentHtml);
+          }, 200);
         });
-        console.error(this.html.get(), val);
       },
     });
   }
-
   updateForm(contentpage: IContentpage): void {
     this.editForm.patchValue({
       id: contentpage.id,
       title: contentpage.title,
       contenthtml: contentpage.contenthtml,
+      contenthtmllink: contentpage.contenthtmllink,
     });
   }
 
@@ -182,7 +201,8 @@ export class ContentpageUpdateComponent implements OnInit {
       ...new Contentpage(),
       id: this.editForm.get(['id'])!.value,
       title: this.editForm.get(['title'])!.value,
-      contenthtml: this.editForm.get(['contenthtml'])!.value,
+      contenthtml: this.currentHtml,
+      contenthtmllink: this.contenthtmlLink,
     };
   }
 
