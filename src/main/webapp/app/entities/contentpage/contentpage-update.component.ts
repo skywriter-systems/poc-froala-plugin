@@ -14,7 +14,7 @@ import * as $ from 'jquery';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import FroalaEditor from 'froala-editor';
-import { element } from 'protractor';
+import { Contentcss } from 'app/shared/model/contentcss.model';
 require('froala-editor-paragraph-format-extended-plugin');
 
 @Component({
@@ -101,7 +101,9 @@ export class ContentpageUpdateComponent implements OnInit {
       // { tag: 'h2', class: 'fr-text-bordered', title: 'H-2 bordered' },
     ],
   };
-
+  contentcss!: Contentcss[];
+  cssOptions = {};
+  // cssOption: any[] = new Array();
   editForm = this.fb.group({
     id: [],
     title: [null, [Validators.required]],
@@ -121,14 +123,17 @@ export class ContentpageUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ contentpage }) => {
       this.updateForm(contentpage);
     });
+    this.contentpageService.getAllCss().subscribe(css => {
+      css.body.forEach((data: any, i: any) => {
+        this.cssOptions[data.csspath] = data.cssname;
+      });
+      console.log(this.cssOptions);
+    });
 
     $(document).ready(() => {
       // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
-      // $('#field_contenthtml').froalaEditor({});
-      // $('#field_contenthtml').froalaEditor('edit.off');
       return $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/3rd-copy.css'));
     });
-
     FroalaEditor.DefineIcon('myDropdown', { NAME: 'cog', SVG_KEY: 'cogs' });
     const self = this;
     // Define a dropdown button.
@@ -139,35 +144,23 @@ export class ContentpageUpdateComponent implements OnInit {
       focus: false,
       undo: false,
       refreshAfterCallback: true,
-      options: {
-        '../../../content/css/3rd-copy.css': '3rd-copy',
-        '../../../content/css/4th-copy.css': '4th-copy',
-      },
+      options: this.cssOptions,
       // Callback.
       callback(cmd: any, val: any, params: any): void {
+        console.log(val);
         const newSS = document.createElement('link');
         newSS.rel = 'stylesheet';
         newSS.href = val;
         newSS.type = 'text/css';
         $(document).ready(() => {
-          // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
-          // $('#field_contenthtml').froalaEditor({});
-          // $('#field_contenthtml').froalaEditor('edit.off');
           $('form > link').remove();
           $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', val));
-
           setTimeout(() => {
             self.currentHtml = this.html.get();
             self.contenthtmlLink = this.html
               .get()
               .replace(/\s*style=(["'])(.*?)\1/gim, '')
               .replace(/<\//gi, `  <link rel="stylesheet" href=${val} type="text/css" /></`);
-
-            // console.log(this.html.get().replace(/\s*style=(["'])(.*?)\1/gmi, '').replace(/<\//ig, `  <link rel="stylesheet" href=${val} type="text/css" /></`));
-            // console.log(this.html.get().replace(/style='[^']'/, '').replace(/<\//ig, `  <link rel="stylesheet" href=${val} type="text/css" /></`));
-            // console.log(this.html.get().replace(/fr-original-style=["'](.*)["']/, '').replcae(/.$/));
-            // console.log(this.html.get().replace(/<\//ig, `  <link rel="stylesheet" href=${val} type="text/css" /></`));
-            // console.log(self.currentHtml);
           }, 200);
         });
       },

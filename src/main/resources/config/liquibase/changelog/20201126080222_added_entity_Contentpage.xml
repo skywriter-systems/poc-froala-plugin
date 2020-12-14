@@ -31,6 +31,7 @@
         </addColumn>
     </changeSet>
 
+
     <changeSet id="20201126080222-1-relations" author="jhipster">
 
     </changeSet>

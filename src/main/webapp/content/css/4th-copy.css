@@ -4,18 +4,6 @@ body {
   margin: 0;
   width: 100%;
 }
-/*
-.froala > * h1,
-h2,
-p,
-i,
-a,
-.first-letter,
-.authorName {
-  color: rgba(0, 0, 0, 0.84);
-  text-rendering: optimizeLegibility;
-}
-*/
 .froala > * h1 {
   font-family: Open Sans, sans-serif;
   font-size: 48px;
@@ -27,7 +15,7 @@ a,
   font-size: 26px;
   font-weight: 700;
   padding: 0;
-  margin: 56px 0 -13px -1.883px;
+  /* margin: 56px 0 -13px -1.883px; */
   text-align: left;
   line-height: 34.5px;
   letter-spacing: -0.45px;
@@ -50,6 +38,33 @@ i {
   letter-spacing: -0.03px;
   line-height: 1.58;
 }
+
+.froala > * h1 > a {
+  font-family: Open Sans, sans-serif;
+  font-size: 48px;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.froala > * h2 > a {
+  font-family: Open Sans, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  padding: 0;
+  /* margin: 56px 0 -13px -1.883px; */
+  text-align: left;
+  line-height: 34.5px;
+  letter-spacing: -0.45px;
+  color: rgb(233, 80, 157);
+}
+
+.froala > * code > a {
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  padding: 3px 5px;
+}
+
 .froala > * blockquote {
   font-family: Open Sans, sans-serif;
   font-size: 30px;

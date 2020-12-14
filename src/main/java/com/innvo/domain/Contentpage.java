@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * A Contentpage.
@@ -32,6 +33,12 @@ public class Contentpage implements Serializable {
 
     @Column(name = "contenthtmllink")
     private String contenthtmllink;
+
+//    @OneToMany(mappedBy = "contentpage", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany()
+    @JoinTable(name = "contentpage_css", joinColumns = {@JoinColumn(name = "contentpage_id")},
+        inverseJoinColumns = {@JoinColumn(name = "contentcss_id")})
+    private Set<Contentcss> contentcss;
 
     public String getContenthtmllink() {
         return contenthtmllink;
@@ -70,6 +77,14 @@ public class Contentpage implements Serializable {
     public Contentpage contenthtml(String contenthtml) {
         this.contenthtml = contenthtml;
         return this;
+    }
+
+    public Set<Contentcss> getContentcss() {
+        return contentcss;
+    }
+
+    public void setContentcss(Set<Contentcss> contentcss) {
+        this.contentcss = contentcss;
     }
 
     public void setContenthtml(String contenthtml) {
