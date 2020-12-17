@@ -2,11 +2,13 @@ package com.innvo.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -35,10 +37,10 @@ public class Contentpage implements Serializable {
     private String contenthtmllink;
 
 //    @OneToMany(mappedBy = "contentpage", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "contentpage_css", joinColumns = {@JoinColumn(name = "contentpage_id")},
         inverseJoinColumns = {@JoinColumn(name = "contentcss_id")})
-    private Set<Contentcss> contentcss;
+    private Set<Contentcss> contentcss = new HashSet<>();
 
     public String getContenthtmllink() {
         return contenthtmllink;

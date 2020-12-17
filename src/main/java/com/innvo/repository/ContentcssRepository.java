@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContentcssRepository extends JpaRepository<Contentcss, Long> {
+
+    Contentcss findByCsspath(String path);
 }
