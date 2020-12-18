@@ -17,7 +17,8 @@
         "title": "Contentpage"
       },
       "title": "Title",
-      "contenthtml": "Contenthtml"
+      "contenthtml": "Contenthtml",
+      "contenthtmllink": "Contenthtmllink"
     }
   }
 }
