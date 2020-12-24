@@ -3,6 +3,8 @@ package com.innvo.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -20,9 +22,10 @@ public class Contentcss implements Serializable {
 
     private String csspath;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "contentpage_id", nullable = true)
-//    private Contentpage contentpage;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contentpage_id", nullable = true)
+    private Contentpage contentpage;
 
     public Long getId() {
         return id;
@@ -46,5 +49,13 @@ public class Contentcss implements Serializable {
 
     public void setCsspath(String csspath) {
         this.csspath = csspath;
+    }
+    
+    public Contentpage getContentpage() {
+        return contentpage;
+    }
+
+    public void setContentpage(Contentpage contentpage) {
+        this.contentpage = contentpage;
     }
 }

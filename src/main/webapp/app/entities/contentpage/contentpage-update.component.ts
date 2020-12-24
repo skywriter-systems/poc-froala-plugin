@@ -68,7 +68,6 @@ export class ContentpageUpdateComponent implements OnInit {
           // 'paragraphFormat',
           'paragraphFormatExtended',
           'paragraphStyle',
-          'myDropdown',
           'lineHeight',
           'outdent',
           'indent',
@@ -102,7 +101,11 @@ export class ContentpageUpdateComponent implements OnInit {
     ],
   };
   contentcss!: any[];
-  cssOptions = {};
+  cssOptions = {
+    '../../../content/css/3rd-copy.css': '3rd-copy',
+    '../../../content/css/4th-copy.css': '4th-copy',
+  };
+  editorContent: any;
   // cssOption: any[] = new Array();
   editForm = this.fb.group({
     id: [],
@@ -121,59 +124,89 @@ export class ContentpageUpdateComponent implements OnInit {
     public sanitizer: DomSanitizer
   ) {}
 
+  cssFileCahnge(val: string, name: string): void {
+    $(document).ready(() => {
+      $('form > link').remove();
+      $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', val));
+      // console.log(this.html.get());
+      setTimeout(() => {
+        const editor = new FroalaEditor('#field_contenthtml', {}, function (): void {});
+
+        this.currentHtml = editor.html.get();
+        this.contenthtmlLink = editor.html
+          .get()
+          .replace(/\s*style=(["'])(.*?)\1/gim, '')
+          .replace(/fr-original-/, '')
+          .replace(/>$/, `><link rel="stylesheet" href=${val} type="text/css" />`);
+        // .replace(/<\//gi, `  <link rel="stylesheet" href=${val} type="text/css" /></`);
+        // console.log(self.contenthtmlLink);
+        this.contentcss = new Array<any>();
+        this.contentcss.push({ csspath: val, cssname: name, id: null });
+      }, 200);
+    });
+  }
+
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ contentpage }) => {
       this.updateForm(contentpage);
+      console.error(contentpage);
+
       if (contentpage.contentcss) {
+        console.error('ttttttttttttttttttttttttttttttttttttttttttttttttttt');
+
         $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', contentpage.contentcss[0].csspath));
+        this.contentcss = contentpage.contentcss;
+        console.error(this.contentcss);
       } else {
         $(document).ready(() => {
           // $('form').append('<link rel="stylesheet" href="../../../content/css/froala-paragraph-format.css" type="text/css" />');
-          return $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/3rd-copy.css'));
+          $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/3rd-copy.css'));
+          this.contentcss = new Array<any>();
+          this.contentcss.push({ csspath: '../../../content/css/3rd-copy.css', cssname: '3rd-copy', id: null });
         });
       }
     });
-    this.contentpageService.getAllCss().subscribe(css => {
-      css.body.forEach((data: any) => {
-        this.cssOptions[data.csspath] = data.cssname;
-      });
-      FroalaEditor.DefineIcon('myDropdown', { NAME: 'cog', SVG_KEY: 'cogs' });
-      const self = this;
-      // Define a dropdown button.
-      FroalaEditor.RegisterCommand('myDropdown', {
-        // Button title.
-        title: 'choose css',
-        type: 'dropdown',
-        focus: false,
-        undo: false,
-        refreshAfterCallback: true,
-        options: this.cssOptions,
-        // Callback.
-        callback(cmd: any, val: any): void {
-          // const newSS = document.createElement('link');
-          // newSS.rel = 'stylesheet';
-          // newSS.href = val;
-          // newSS.type = 'text/css';
-          $(document).ready(() => {
-            $('form > link').remove();
-            $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', val));
-            // console.log(this.html.get());
-            setTimeout(() => {
-              self.currentHtml = this.html.get();
-              self.contenthtmlLink = this.html
-                .get()
-                .replace(/\s*style=(["'])(.*?)\1/gim, '')
-                .replace(/fr-original-/, '')
-                .replace(/>$/, `><link rel="stylesheet" href=${val} type="text/css" />`);
-              // .replace(/<\//gi, `  <link rel="stylesheet" href=${val} type="text/css" /></`);
-              // console.log(self.contenthtmlLink);
-              self.contentcss = new Array<any>();
-              self.contentcss.push(val);
-            }, 200);
-          });
-        },
-      });
+    // this.contentpageService.getAllCss().subscribe(css => {
+    //css.body.forEach((data: any) => {
+    //  this.cssOptions[data.csspath] = data.cssname;
+    //});
+    FroalaEditor.DefineIcon('myDropdown', { NAME: 'cog', SVG_KEY: 'cogs' });
+    const self = this;
+    // Define a dropdown button.
+    FroalaEditor.RegisterCommand('myDropdown', {
+      // Button title.
+      title: 'choose css',
+      type: 'dropdown',
+      focus: false,
+      undo: false,
+      refreshAfterCallback: true,
+      options: this.cssOptions,
+      // Callback.
+      callback(cmd: any, val: any): void {
+        // const newSS = document.createElement('link');
+        // newSS.rel = 'stylesheet';
+        // newSS.href = val;
+        // newSS.type = 'text/css';
+        $(document).ready(() => {
+          $('form > link').remove();
+          $('form').append($('<link rel="stylesheet" type="text/css" />').attr('href', val));
+          // console.log(this.html.get());
+          setTimeout(() => {
+            self.currentHtml = this.html.get();
+            self.contenthtmlLink = this.html
+              .get()
+              .replace(/\s*style=(["'])(.*?)\1/gim, '')
+              .replace(/fr-original-/, '')
+              .replace(/>$/, `><link rel="stylesheet" href=${val} type="text/css" />`);
+            // .replace(/<\//gi, `  <link rel="stylesheet" href=${val} type="text/css" /></`);
+            // console.log(self.contenthtmlLink);
+            self.contentcss = new Array<any>();
+            self.contentcss.push(val);
+          }, 200);
+        });
+      },
     });
+    //  });
   }
   updateForm(contentpage: IContentpage): void {
     this.editForm.patchValue({
@@ -183,6 +216,9 @@ export class ContentpageUpdateComponent implements OnInit {
       contenthtmllink: contentpage.contenthtmllink,
       contentcss: contentpage.contentcss,
     });
+    this.currentHtml = contentpage.contenthtml;
+    this.contenthtmlLink = contentpage.contenthtmllink;
+    this.editorContent = contentpage.contenthtml;
   }
 
   previousState(): void {
@@ -202,12 +238,18 @@ export class ContentpageUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IContentpage {
+    const editor = new FroalaEditor('#field_contenthtml', {}, function (): void {});
+
     return {
       ...new Contentpage(),
       id: this.editForm.get(['id'])!.value,
       title: this.editForm.get(['title'])!.value,
-      contenthtml: this.currentHtml,
-      contenthtmllink: this.contenthtmlLink,
+      contenthtml: editor.html.get(),
+      contenthtmllink: editor.html
+        .get()
+        .replace(/\s*style=(["'])(.*?)\1/gim, '')
+        .replace(/fr-original-/, '')
+        .replace(/>$/, `><link rel="stylesheet" href=${this.contentcss[0].csspath} type="text/css" />`),
       contentcss: this.contentcss,
     };
   }

@@ -61,22 +61,26 @@ public class ContentpageResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/contentpages")
-    public ResponseEntity<Contentpage> createContentpage(@Valid @RequestBody ContentpageDTO contentpage) throws URISyntaxException {
+    public ResponseEntity<Contentpage> createContentpage(@Valid @RequestBody Contentpage contentpage) throws URISyntaxException {
         log.debug("REST request to save Contentpage : {}", contentpage);
         Contentpage contentpageRequest = new Contentpage();
         if (contentpage.getId() != null) {
             throw new BadRequestAlertException("A new contentpage cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        if (contentpage.getContentcss() != null) {
-            Set<Contentcss> contentcsses = contentpage.getContentcss().stream()
-                .map(contentcssRepository::findByCsspath)
-                .collect(Collectors.toSet());
-            contentpageRequest.setContentcss(contentcsses);
-        }
+//        if (contentpage.getContentcss() != null) {
+//            List<Contentcss> contentcsses = contentpage.getContentcss().stream()
+//                .map(contentcssRepository::findByCsspath)
+//                .collect(Collectors.toList());
+//            contentpageRequest.setContentcss(contentcsses);
+//        }
         contentpageRequest.setTitle(contentpage.getTitle());
         contentpageRequest.setContenthtml(contentpage.getContenthtml());
         contentpageRequest.setContenthtmllink(contentpage.getContenthtmllink());
         Contentpage result = contentpageRepository.save(contentpageRequest);
+        for(Contentcss css : contentpage.getContentcss()) {
+        	css.setContentpage(result);
+        	contentcssRepository.save(css);
+        }
         return ResponseEntity.created(new URI("/api/contentpages/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -92,23 +96,30 @@ public class ContentpageResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/contentpages")
-    public ResponseEntity<Contentpage> updateContentpage(@Valid @RequestBody ContentpageDTO contentpage) throws URISyntaxException {
+    public ResponseEntity<Contentpage> updateContentpage(@Valid @RequestBody Contentpage contentpage) throws URISyntaxException {
         log.debug("REST request to update Contentpage : {}", contentpage);
         Contentpage contentpageRequest = new Contentpage();
         if (contentpage.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         contentpageRequest.setId(contentpage.getId());
-        if (contentpage.getContentcss() != null) {
-            Set<Contentcss> contentcsses = contentpage.getContentcss().stream()
-                .map(contentcssRepository::findByCsspath)
-                .collect(Collectors.toSet());
-            contentpageRequest.setContentcss(contentcsses);
-        }
+//        if (contentpage.getContentcss() != null) {
+//            List<Contentcss> contentcsses = contentpage.getContentcss().stream()
+//                .map(contentcssRepository::findByCsspath)
+//                .collect(Collectors.toList());
+//            contentpageRequest.setContentcss(contentcsses);
+//        }
+        contentcssRepository.deleteByContentPageId(contentpage.getId());
         contentpageRequest.setTitle(contentpage.getTitle());
         contentpageRequest.setContenthtml(contentpage.getContenthtml());
         contentpageRequest.setContenthtmllink(contentpage.getContenthtmllink());
         Contentpage result = contentpageRepository.save(contentpageRequest);
+        for(Contentcss css : contentpage.getContentcss()) {
+        	System.out.println("sssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+        	css.setId(null);
+        	css.setContentpage(result);
+        	contentcssRepository.save(css);
+        }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contentpage.getId().toString()))
             .body(result);

@@ -10,6 +10,7 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 
 /**
  * A Contentpage.
@@ -36,11 +37,11 @@ public class Contentpage implements Serializable {
     @Column(name = "contenthtmllink")
     private String contenthtmllink;
 
-//    @OneToMany(mappedBy = "contentpage", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "contentpage_css", joinColumns = {@JoinColumn(name = "contentpage_id")},
-        inverseJoinColumns = {@JoinColumn(name = "contentcss_id")})
-    private Set<Contentcss> contentcss = new HashSet<>();
+    @OneToMany(mappedBy = "contentpage", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "contentpage_css", joinColumns = {@JoinColumn(name = "contentpage_id")},
+//        inverseJoinColumns = {@JoinColumn(name = "contentcss_id")})
+    private List<Contentcss> contentcss;
 
     public String getContenthtmllink() {
         return contenthtmllink;
@@ -81,11 +82,11 @@ public class Contentpage implements Serializable {
         return this;
     }
 
-    public Set<Contentcss> getContentcss() {
+    public List<Contentcss> getContentcss() {
         return contentcss;
     }
 
-    public void setContentcss(Set<Contentcss> contentcss) {
+    public void setContentcss(List<Contentcss> contentcss) {
         this.contentcss = contentcss;
     }
 

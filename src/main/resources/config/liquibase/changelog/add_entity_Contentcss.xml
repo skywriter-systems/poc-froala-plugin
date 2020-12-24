@@ -17,30 +17,17 @@
             <column name="csspath" type="varchar(10000)">
                 <constraints nullable="true" />
             </column>
-        </createTable>
-
-        <createTable tableName="contentpage_css">
             <column name="contentpage_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contentcss_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="contentpage_id, contentcss_id" tableName="contentpage_css"/>
-
+        
         <addForeignKeyConstraint baseColumnNames="contentpage_id"
-                                 baseTableName="contentpage_css"
+                                 baseTableName="contentcss"
                                  constraintName="fk_contentpage_id"
                                  referencedColumnNames="id"
                                  referencedTableName="contentpage"/>
-
-        <addForeignKeyConstraint baseColumnNames="contentcss_id"
-                                 baseTableName="contentpage_css"
-                                 constraintName="fk_contentcss_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="contentcss"/>
 
     </changeSet>
 
