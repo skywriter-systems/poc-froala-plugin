@@ -1,7 +1,8 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-contentpage-heading" jhiTranslate="froalaApp.contentpage.home.createOrEditLabel">Create or edit a Contentpage</h2>
+        <form name="editForm" role="form" id='froala-form' novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-contentpage-heading" jhiTranslate="froalaApp.contentpage.home.createOrEditLabel">Create or edit
+                a Contentpage</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,21 +13,35 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="froalaApp.contentpage.title" for="field_title">Title</label>
-                    <input type="text" class="form-control" name="title" id="field_title"
-                           formControlName="title"/>
-                    <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('title')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
+                    <label class="form-control-label" jhiTranslate="froalaApp.contentpage.title"
+                        for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title" formControlName="title" />
+                    <div
+                        *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="froalaApp.contentpage.contenthtml" for="field_contenthtml">Contenthtml</label>
-                    <textarea type="text" class="form-control" name="contenthtml" id="field_contenthtml" [froalaEditor]='options'
-                           formControlName="contenthtml"></textarea>
+                <input type="radio" id="css3" [checked]="contentcss[0]?.csspath === '../../../content/css/3rd-copy.css'" name="cssfile" (change)="cssFileCahnge('../../../content/css/3rd-copy.css' , '3rd-copy')" value="../../../content/css/3rd-copy.css">
+                <label for="css3">3rd-copy</label><br>
+                <input type="radio" id="css4" name="cssfile" [checked]="contentcss[0]?.csspath === '../../../content/css/4th-copy.css'" (change)="cssFileCahnge('../../../content/css/4th-copy.css' , '4th-copy')" value="../../../content/css/4th-copy.css">
+                <label for="css4">4th-copy</label><br>
+
+                <div class="form-group froala">
+                    <label class="form-control-label" jhiTranslate="froalaApp.contentpage.contenthtml"
+                        for="field_contenthtml">Contenthtml</label>
+                    <textarea type="text" class="form-control" name="contenthtml" id="field_contenthtml"
+                        [froalaEditor]='options' [(froalaModel)]="editorContent" formControlName="contenthtml"></textarea>
+                </div>
+
+                <div class="form-group froala">
+                    <label class="form-control-label" jhiTranslate="froalaApp.contentpage.contenthtmllink"
+                        for="field_contenthtmllink">Contenthtmllink</label>
+                    <textarea type="textarea" class="form-control" name="contenthtmllink" id="field_contenthtmllink"
+                        formControlName="contenthtmllink"></textarea>
                 </div>
             </div>
 
@@ -35,7 +50,8 @@
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                    class="btn btn-primary">
                     <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

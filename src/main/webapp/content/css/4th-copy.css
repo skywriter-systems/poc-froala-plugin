@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&family=Open+Sans&display=swap&family=Lato:400,700|Lora|Playfair+Display:700i,900');
+.froala > * html,
+body {
+  margin: 0;
+  width: 100%;
+}
+.froala > * h1 {
+  font-family: Open Sans, sans-serif;
+  font-size: 48px;
+  text-align: left;
+  margin-bottom: 8px;
+}
+.froala > * h2 {
+  font-family: Open Sans, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  padding: 0;
+  /* margin: 56px 0 -13px -1.883px; */
+  text-align: left;
+  line-height: 34.5px;
+  letter-spacing: -0.45px;
+  color: rgb(233, 80, 157);
+}
+.froala > * p,
+i {
+  margin-top: 21px;
+  font-family: Lora;
+  font-size: 21px;
+  letter-spacing: -0.03px;
+  line-height: 1.58;
+}
+
+.froala > * a {
+  text-decoration: underline;
+  margin-top: 21px;
+  font-family: Lora;
+  font-size: 21px;
+  letter-spacing: -0.03px;
+  line-height: 1.58;
+}
+
+.froala > * h1 > a {
+  font-family: Open Sans, sans-serif;
+  font-size: 48px;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.froala > * h2 > a {
+  font-family: Open Sans, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  padding: 0;
+  /* margin: 56px 0 -13px -1.883px; */
+  text-align: left;
+  line-height: 34.5px;
+  letter-spacing: -0.45px;
+  color: rgb(233, 80, 157);
+}
+
+.froala > * code > a {
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  padding: 3px 5px;
+}
+
+.froala > * blockquote {
+  font-family: Open Sans, sans-serif;
+  font-size: 30px;
+  font-style: italic;
+  letter-spacing: -0.36px;
+  line-height: 44.4px;
+  overflow-wrap: break-word;
+  margin: 55px 0 33px 0;
+  /* text-align: center; */
+  color: rgba(0, 0, 0, 0.68);
+  padding: 0 0 0 50px;
+}
+.froala > * code {
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  padding: 3px 5px;
+}
+.froala > * mark,
+.highlighted {
+  background: #7dffb3;
+}
+.froala > * .first-letter {
+  overflow-wrap: break-word;
+  font-family: Open Sans, sans-serif;
+  font-size: 60px;
+  line-height: 60px;
+  display: block;
+  position: relative;
+  float: left;
+  margin: 0px 7px 0 -5px;
+}
+.froala > * .subtitle {
+  font-family: Open Sans, sans-serif;
+  color: rgba(0, 0, 0, 0.54);
+  margin: 0 0 24px 0;
+}
+.froala > * ::selection {
+  background-color: lavender;
+}

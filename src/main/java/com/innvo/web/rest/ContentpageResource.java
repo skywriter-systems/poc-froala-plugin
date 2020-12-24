@@ -1,7 +1,10 @@
 package com.innvo.web.rest;
 
+import com.innvo.domain.Contentcss;
 import com.innvo.domain.Contentpage;
+import com.innvo.repository.ContentcssRepository;
 import com.innvo.repository.ContentpageRepository;
+import com.innvo.service.dto.ContentpageDTO;
 import com.innvo.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -24,6 +27,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing {@link com.innvo.domain.Contentpage}.
@@ -41,9 +46,11 @@ public class ContentpageResource {
     private String applicationName;
 
     private final ContentpageRepository contentpageRepository;
+    private final ContentcssRepository contentcssRepository;
 
-    public ContentpageResource(ContentpageRepository contentpageRepository) {
+    public ContentpageResource(ContentpageRepository contentpageRepository, ContentcssRepository contentcssRepository) {
         this.contentpageRepository = contentpageRepository;
+        this.contentcssRepository = contentcssRepository;
     }
 
     /**
@@ -56,10 +63,24 @@ public class ContentpageResource {
     @PostMapping("/contentpages")
     public ResponseEntity<Contentpage> createContentpage(@Valid @RequestBody Contentpage contentpage) throws URISyntaxException {
         log.debug("REST request to save Contentpage : {}", contentpage);
+        Contentpage contentpageRequest = new Contentpage();
         if (contentpage.getId() != null) {
             throw new BadRequestAlertException("A new contentpage cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Contentpage result = contentpageRepository.save(contentpage);
+//        if (contentpage.getContentcss() != null) {
+//            List<Contentcss> contentcsses = contentpage.getContentcss().stream()
+//                .map(contentcssRepository::findByCsspath)
+//                .collect(Collectors.toList());
+//            contentpageRequest.setContentcss(contentcsses);
+//        }
+        contentpageRequest.setTitle(contentpage.getTitle());
+        contentpageRequest.setContenthtml(contentpage.getContenthtml());
+        contentpageRequest.setContenthtmllink(contentpage.getContenthtmllink());
+        Contentpage result = contentpageRepository.save(contentpageRequest);
+        for(Contentcss css : contentpage.getContentcss()) {
+        	css.setContentpage(result);
+        	contentcssRepository.save(css);
+        }
         return ResponseEntity.created(new URI("/api/contentpages/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -77,10 +98,28 @@ public class ContentpageResource {
     @PutMapping("/contentpages")
     public ResponseEntity<Contentpage> updateContentpage(@Valid @RequestBody Contentpage contentpage) throws URISyntaxException {
         log.debug("REST request to update Contentpage : {}", contentpage);
+        Contentpage contentpageRequest = new Contentpage();
         if (contentpage.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Contentpage result = contentpageRepository.save(contentpage);
+        contentpageRequest.setId(contentpage.getId());
+//        if (contentpage.getContentcss() != null) {
+//            List<Contentcss> contentcsses = contentpage.getContentcss().stream()
+//                .map(contentcssRepository::findByCsspath)
+//                .collect(Collectors.toList());
+//            contentpageRequest.setContentcss(contentcsses);
+//        }
+        contentcssRepository.deleteByContentPageId(contentpage.getId());
+        contentpageRequest.setTitle(contentpage.getTitle());
+        contentpageRequest.setContenthtml(contentpage.getContenthtml());
+        contentpageRequest.setContenthtmllink(contentpage.getContenthtmllink());
+        Contentpage result = contentpageRepository.save(contentpageRequest);
+        for(Contentcss css : contentpage.getContentcss()) {
+        	System.out.println("sssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+        	css.setId(null);
+        	css.setContentpage(result);
+        	contentcssRepository.save(css);
+        }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contentpage.getId().toString()))
             .body(result);

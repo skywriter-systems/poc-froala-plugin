@@ -25,6 +25,13 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="add-contenthtmllink" author="ahmed">
+        <addColumn tableName="contentpage">
+            <column name="contenthtmllink" type="varchar(10000)"></column>
+        </addColumn>
+    </changeSet>
+
+
     <changeSet id="20201126080222-1-relations" author="jhipster">
 
     </changeSet>

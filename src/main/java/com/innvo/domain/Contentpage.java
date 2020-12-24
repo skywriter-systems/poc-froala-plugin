@@ -2,11 +2,15 @@ package com.innvo.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
 
 /**
  * A Contentpage.
@@ -29,6 +33,23 @@ public class Contentpage implements Serializable {
 
     @Column(name = "contenthtml")
     private String contenthtml;
+
+    @Column(name = "contenthtmllink")
+    private String contenthtmllink;
+
+    @OneToMany(mappedBy = "contentpage", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "contentpage_css", joinColumns = {@JoinColumn(name = "contentpage_id")},
+//        inverseJoinColumns = {@JoinColumn(name = "contentcss_id")})
+    private List<Contentcss> contentcss;
+
+    public String getContenthtmllink() {
+        return contenthtmllink;
+    }
+
+    public void setContenthtmllink(String contenthtmllink) {
+        this.contenthtmllink = contenthtmllink;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -59,6 +80,14 @@ public class Contentpage implements Serializable {
     public Contentpage contenthtml(String contenthtml) {
         this.contenthtml = contenthtml;
         return this;
+    }
+
+    public List<Contentcss> getContentcss() {
+        return contentcss;
+    }
+
+    public void setContentcss(List<Contentcss> contentcss) {
+        this.contentcss = contentcss;
     }
 
     public void setContenthtml(String contenthtml) {

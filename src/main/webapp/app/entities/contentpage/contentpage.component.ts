@@ -4,12 +4,13 @@ import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
 import { Subscription, combineLatest } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import * as $ from 'jquery';
 import { IContentpage } from 'app/shared/model/contentpage.model';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { ContentpageService } from './contentpage.service';
 import { ContentpageDeleteDialogComponent } from './contentpage-delete-dialog.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'jhi-contentpage',
@@ -24,13 +25,14 @@ export class ContentpageComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
-
+  code: any;
   constructor(
     protected contentpageService: ContentpageService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected sanitizer: DomSanitizer
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
@@ -51,6 +53,23 @@ export class ContentpageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.handleNavigation();
     this.registerChangeInContentpages();
+    $(document).ready(() => {
+      return $('span').append($('<link rel="stylesheet" type="text/css" />').attr('href', '../../../content/css/3rd-copy.css'));
+    });
+    // setTimeout(() => {
+    //   document.querySelectorAll("[fr-original-class]").forEach( (element) => {
+    //     // element.outerHTML = element.outerHTML.replace('fr-original-class' , 'class')
+    //     const x = element.getAttribute('fr-original-class');
+    //     element.setAttribute('class', `${x}`);
+    //     element.removeAttribute('fr-original-class');
+    //   });
+    // }, 300);
+  }
+  public secureCntent(value: any): any {
+    if (value.includes('fr-original-class')) {
+      return this.sanitizer.bypassSecurityTrustHtml(value.replace(/fr-original-/, ''));
+    }
+    return this.sanitizer.bypassSecurityTrustHtml(value);
   }
 
   protected handleNavigation(): void {

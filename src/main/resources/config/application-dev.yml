@@ -43,6 +43,7 @@ spring:
     hikari:
       poolName: Hikari
       auto-commit: false
+    initialization-mode: embedded
   h2:
     console:
       enabled: false
