@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg'; // echasin
 
 import { FroalaSharedModule } from 'app/shared/shared.module';
 import { ContentpageComponent } from './contentpage.component';
@@ -9,7 +10,7 @@ import { ContentpageDeleteDialogComponent } from './contentpage-delete-dialog.co
 import { contentpageRoute } from './contentpage.route';
 
 @NgModule({
-  imports: [FroalaSharedModule, RouterModule.forChild(contentpageRoute)],
+  imports: [FroalaSharedModule, RouterModule.forChild(contentpageRoute), FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()], // echasin
   declarations: [ContentpageComponent, ContentpageDetailComponent, ContentpageUpdateComponent, ContentpageDeleteDialogComponent],
   entryComponents: [ContentpageDeleteDialogComponent],
 })

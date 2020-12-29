@@ -2,7 +2,8 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-contentpage-heading" jhiTranslate="froalaApp.contentpage.home.createOrEditLabel">Create or edit a Contentpage</h2>
-
+                <!-- Added Froala Editor Test Case -->
+                <div id="edit" [froalaEditor]>Hello, Froala!</div>
             <div>
                 <jhi-alert-error></jhi-alert-error>
 

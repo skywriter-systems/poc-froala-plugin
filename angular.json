@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "froala": {
+    "ui": {
       "root": "",
       "sourceRoot": "src/main/webapp",
       "projectType": "application",
@@ -25,11 +25,19 @@
           "skipTests": true
         }
       },
-      "prefix": "jhi",
-      "architect": {}
+      "prefix": "",
+      "architect": {
+        "build": {
+          "styles": [
+            "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+            "./node_modules/froala-editor/css/froala_style.min.css"
+          ],
+          "scripts": ["./node_modules/froala-editor/js/froala_editor.pkgd.min.js"]
+        }
+      }
     }
   },
-  "defaultProject": "froala",
+  "defaultProject": "ui",
   "cli": {
     "packageManager": "npm"
   }
