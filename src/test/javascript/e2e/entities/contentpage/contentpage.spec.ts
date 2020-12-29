@@ -43,11 +43,7 @@ describe('Contentpage e2e test', () => {
 
     await contentpageComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      contentpageUpdatePage.setTitleInput('title'),
-      contentpageUpdatePage.setContenthtmlInput('contenthtml'),
-      contentpageUpdatePage.contentcssSelectLastOption(),
-    ]);
+    await promise.all([contentpageUpdatePage.setTitleInput('title'), contentpageUpdatePage.setContenthtmlInput('contenthtml')]);
 
     expect(await contentpageUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
     expect(await contentpageUpdatePage.getContenthtmlInput()).to.eq(

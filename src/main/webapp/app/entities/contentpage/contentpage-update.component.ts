@@ -7,8 +7,6 @@ import { Observable } from 'rxjs';
 
 import { IContentpage, Contentpage } from 'app/shared/model/contentpage.model';
 import { ContentpageService } from './contentpage.service';
-import { IContentcss } from 'app/shared/model/contentcss.model';
-import { ContentcssService } from 'app/entities/contentcss/contentcss.service';
 
 @Component({
   selector: 'jhi-contentpage-update',
@@ -16,27 +14,18 @@ import { ContentcssService } from 'app/entities/contentcss/contentcss.service';
 })
 export class ContentpageUpdateComponent implements OnInit {
   isSaving = false;
-  contentcsses: IContentcss[] = [];
 
   editForm = this.fb.group({
     id: [],
     title: [null, [Validators.required]],
     contenthtml: [],
-    contentcss: [],
   });
 
-  constructor(
-    protected contentpageService: ContentpageService,
-    protected contentcssService: ContentcssService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected contentpageService: ContentpageService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ contentpage }) => {
       this.updateForm(contentpage);
-
-      this.contentcssService.query().subscribe((res: HttpResponse<IContentcss[]>) => (this.contentcsses = res.body || []));
     });
   }
 
@@ -45,7 +34,6 @@ export class ContentpageUpdateComponent implements OnInit {
       id: contentpage.id,
       title: contentpage.title,
       contenthtml: contentpage.contenthtml,
-      contentcss: contentpage.contentcss,
     });
   }
 
@@ -69,7 +57,6 @@ export class ContentpageUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       title: this.editForm.get(['title'])!.value,
       contenthtml: this.editForm.get(['contenthtml'])!.value,
-      contentcss: this.editForm.get(['contentcss'])!.value,
     };
   }
 
@@ -87,9 +74,5 @@ export class ContentpageUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: IContentcss): any {
-    return item.id;
   }
 }

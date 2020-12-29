@@ -12,6 +12,10 @@ import { RouterModule } from '@angular/router';
         path: 'contentpage',
         loadChildren: () => import('./contentpage/contentpage.module').then(m => m.FroalaContentpageModule),
       },
+      {
+        path: 'contentworkspace',
+        loadChildren: () => import('./contentworkspace/contentworkspace.module').then(m => m.FroalaContentworkspaceModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

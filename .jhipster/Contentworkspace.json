@@ -1,23 +1,27 @@
 {
   "fluentMethods": true,
   "clientRootFolder": "",
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipName": "contentcss",
+      "otherEntityName": "contentcss",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "name",
+      "otherEntityRelationshipName": "contentpage"
+    }
+  ],
   "fields": [
     {
-      "fieldName": "title",
+      "fieldName": "name",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "contenthtml",
-      "fieldType": "String"
     }
   ],
   "changelogDate": "20201126080222",
   "dto": "no",
   "searchEngine": false,
   "service": "no",
-  "entityTableName": "contentpage",
+  "entityTableName": "contentworkspace",
   "databaseType": "sql",
   "readOnly": false,
   "jpaMetamodelFiltering": false,

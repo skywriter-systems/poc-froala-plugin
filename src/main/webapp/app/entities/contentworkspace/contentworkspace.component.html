@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="froalaApp.contentpage.home.title">Contentpages</span>
+        <span jhiTranslate="froalaApp.contentworkspace.home.title">Contentworkspaces</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-contentpage" [routerLink]="['/contentpage/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-contentworkspace" [routerLink]="['/contentworkspace/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="froalaApp.contentpage.home.createLabel">
-            Create a new Contentpage
+            <span  jhiTranslate="froalaApp.contentworkspace.home.createLabel">
+            Create a new Contentworkspace
             </span>
         </button>
     </h2>
@@ -14,42 +14,46 @@
 
     <jhi-alert></jhi-alert>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="contentpages?.length === 0">
-        <span jhiTranslate="froalaApp.contentpage.home.notFound">No contentpages found</span>
+    <div class="alert alert-warning" id="no-result" *ngIf="contentworkspaces?.length === 0">
+        <span jhiTranslate="froalaApp.contentworkspace.home.notFound">No contentworkspaces found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="contentpages && contentpages.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="contentworkspaces && contentworkspaces.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="title"><span jhiTranslate="froalaApp.contentpage.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="contenthtml"><span jhiTranslate="froalaApp.contentpage.contenthtml">Contenthtml</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="froalaApp.contentworkspace.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="contentcss.name"><span jhiTranslate="froalaApp.contentworkspace.contentcss">Contentcss</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let contentpage of contentpages ;trackBy: trackId">
-                    <td><a [routerLink]="['/contentpage', contentpage.id, 'view']">{{ contentpage.id }}</a></td>
-                    <td>{{ contentpage.title }}</td>
-                    <td>{{ contentpage.contenthtml }}</td>
+                <tr *ngFor="let contentworkspace of contentworkspaces ;trackBy: trackId">
+                    <td><a [routerLink]="['/contentworkspace', contentworkspace.id, 'view']">{{ contentworkspace.id }}</a></td>
+                    <td>{{ contentworkspace.name }}</td>
+                    <td>
+                        <div *ngIf="contentworkspace.contentcss">
+                            <a [routerLink]="['/contentcss', contentworkspace.contentcss?.id, 'view']" >{{ contentworkspace.contentcss?.name }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
-                                    [routerLink]="['/contentpage', contentpage.id, 'view']"
+                                    [routerLink]="['/contentworkspace', contentworkspace.id, 'view']"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
                             <button type="submit"
-                                    [routerLink]="['/contentpage', contentpage.id, 'edit']"
+                                    [routerLink]="['/contentworkspace', contentworkspace.id, 'edit']"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
 
-                            <button type="submit" (click)="delete(contentpage)"
+                            <button type="submit" (click)="delete(contentworkspace)"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
@@ -61,7 +65,7 @@
         </table>
     </div>
 
-    <div *ngIf="contentpages && contentpages.length > 0">
+    <div *ngIf="contentworkspaces && contentworkspaces.length > 0">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

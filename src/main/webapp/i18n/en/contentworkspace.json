@@ -1,0 +1,23 @@
+{
+  "froalaApp": {
+    "contentworkspace": {
+      "home": {
+        "title": "Contentworkspaces",
+        "createLabel": "Create a new Contentworkspace",
+        "createOrEditLabel": "Create or edit a Contentworkspace",
+        "notFound": "No Contentworkspaces found"
+      },
+      "created": "A new Contentworkspace is created with identifier {{ param }}",
+      "updated": "A Contentworkspace is updated with identifier {{ param }}",
+      "deleted": "A Contentworkspace is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Contentworkspace {{ id }}?"
+      },
+      "detail": {
+        "title": "Contentworkspace"
+      },
+      "name": "Name",
+      "contentcss": "Contentcss"
+    }
+  }
+}

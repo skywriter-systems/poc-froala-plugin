@@ -8,17 +8,17 @@
 
     
     <!--
-        Added the entity Contentpage.
+        Added the entity Contentworkspace.
     -->
     <changeSet id="20201126080222-1" author="jhipster">
-        <createTable tableName="contentpage">
+        <createTable tableName="contentworkspace">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="title" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="contenthtml" type="varchar(255)">
+            <column name="contentcss_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -40,12 +40,11 @@
     -->
     <changeSet id="20201126080222-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/contentpage.csv"
+                  file="config/liquibase/fake-data/contentworkspace.csv"
                   separator=";"
-                  tableName="contentpage">
+                  tableName="contentworkspace">
             <column name="id" type="numeric"/>
-            <column name="title" type="string"/>
-            <column name="contenthtml" type="string"/>
+            <column name="name" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

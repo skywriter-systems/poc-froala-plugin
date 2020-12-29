@@ -1,20 +1,22 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <div *ngIf="contentpage">
-            <h2><span jhiTranslate="froalaApp.contentpage.detail.title">Contentpage</span> {{ contentpage.id }}</h2>
+        <div *ngIf="contentworkspace">
+            <h2><span jhiTranslate="froalaApp.contentworkspace.detail.title">Contentworkspace</span> {{ contentworkspace.id }}</h2>
 
             <hr>
 
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="froalaApp.contentpage.title">Title</span></dt>
+                <dt><span jhiTranslate="froalaApp.contentworkspace.name">Name</span></dt>
                 <dd>
-                    <span>{{ contentpage.title }}</span>
+                    <span>{{ contentworkspace.name }}</span>
                 </dd>
-                <dt><span jhiTranslate="froalaApp.contentpage.contenthtml">Contenthtml</span></dt>
+                <dt><span jhiTranslate="froalaApp.contentworkspace.contentcss">Contentcss</span></dt>
                 <dd>
-                    <span>{{ contentpage.contenthtml }}</span>
+                    <div *ngIf="contentworkspace.contentcss">
+                        <a [routerLink]="['/contentcss', contentworkspace.contentcss?.id, 'view']">{{ contentworkspace.contentcss?.name }}</a>
+                    </div>
                 </dd>
             </dl>
 
@@ -25,7 +27,7 @@
             </button>
 
             <button type="button"
-                    [routerLink]="['/contentpage', contentpage.id, 'edit']"
+                    [routerLink]="['/contentworkspace', contentworkspace.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>

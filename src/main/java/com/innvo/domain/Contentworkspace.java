@@ -1,5 +1,6 @@
 package com.innvo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -9,12 +10,12 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
- * A Contentpage.
+ * A Contentworkspace.
  */
 @Entity
-@Table(name = "contentpage")
+@Table(name = "contentworkspace")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Contentpage implements Serializable {
+public class Contentworkspace implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,11 +25,12 @@ public class Contentpage implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "title", nullable = false)
-    private String title;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "contenthtml")
-    private String contenthtml;
+    @ManyToOne
+    @JsonIgnoreProperties(value = "contentpages", allowSetters = true)
+    private Contentcss contentcss;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -39,30 +41,30 @@ public class Contentpage implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public Contentpage title(String title) {
-        this.title = title;
+    public Contentworkspace name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getContenthtml() {
-        return contenthtml;
+    public Contentcss getContentcss() {
+        return contentcss;
     }
 
-    public Contentpage contenthtml(String contenthtml) {
-        this.contenthtml = contenthtml;
+    public Contentworkspace contentcss(Contentcss contentcss) {
+        this.contentcss = contentcss;
         return this;
     }
 
-    public void setContenthtml(String contenthtml) {
-        this.contenthtml = contenthtml;
+    public void setContentcss(Contentcss contentcss) {
+        this.contentcss = contentcss;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -71,10 +73,10 @@ public class Contentpage implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Contentpage)) {
+        if (!(o instanceof Contentworkspace)) {
             return false;
         }
-        return id != null && id.equals(((Contentpage) o).id);
+        return id != null && id.equals(((Contentworkspace) o).id);
     }
 
     @Override
@@ -85,10 +87,9 @@ public class Contentpage implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "Contentpage{" +
+        return "Contentworkspace{" +
             "id=" + getId() +
-            ", title='" + getTitle() + "'" +
-            ", contenthtml='" + getContenthtml() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }
