@@ -26,8 +26,14 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="froalaApp.contentpage.contenthtml" for="field_contenthtml">Contenthtml</label>
-                    <input type="text" class="form-control" name="contenthtml" id="field_contenthtml"
-                           formControlName="contenthtml"/>
+                    <textarea type="text" class="form-control" name="contenthtml" id="field_contenthtml"
+                    [froalaEditor] formControlName="contenthtml"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="froalaApp.contentpage.contenthtml" for="field_contenthtml">Contenthtml</label>
+                    <textarea type="text" class="form-control" name="contenthtml" id="field_contenthtml"
+                    formControlName="contenthtml" readonly></textarea>
                 </div>
 
                 <div class="form-group">
