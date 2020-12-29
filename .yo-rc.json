@@ -4,7 +4,7 @@
       "packageName": "com.innvo",
       "nativeLanguage": "en"
     },
-    "jhipsterVersion": "6.9.1",
+    "jhipsterVersion": "6.10.5",
     "applicationType": "monolith",
     "baseName": "froala",
     "packageName": "com.innvo",
@@ -39,6 +39,6 @@
     "nativeLanguage": "en",
     "languages": ["en"],
     "blueprints": [],
-    "lastLiquibaseTimestamp": 1606377742000
+    "lastLiquibaseTimestamp": 1609210506000
   }
 }

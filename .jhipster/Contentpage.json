@@ -1,7 +1,15 @@
 {
   "fluentMethods": true,
   "clientRootFolder": "",
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipName": "contentcss",
+      "otherEntityName": "contentcss",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "name",
+      "otherEntityRelationshipName": "contentpage"
+    }
+  ],
   "fields": [
     {
       "fieldName": "title",

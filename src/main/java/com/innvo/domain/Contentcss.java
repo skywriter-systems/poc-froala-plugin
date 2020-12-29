@@ -3,30 +3,34 @@ package com.innvo.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import javax.validation.constraints.*;
+
 import java.io.Serializable;
 
+/**
+ * A Contentcss.
+ */
 @Entity
 @Table(name = "contentcss")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Contentcss implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    private String cssname;
+    @Column(name = "name")
+    private String name;
 
-    private String csspath;
+    @NotNull
+    @Column(name = "cssurl", nullable = false)
+    private String cssurl;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contentpage_id", nullable = true)
-    private Contentpage contentpage;
-
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -35,27 +39,56 @@ public class Contentcss implements Serializable {
         this.id = id;
     }
 
-    public String getCssname() {
-        return cssname;
+    public String getName() {
+        return name;
     }
 
-    public void setCssname(String cssname) {
-        this.cssname = cssname;
+    public Contentcss name(String name) {
+        this.name = name;
+        return this;
     }
 
-    public String getCsspath() {
-        return csspath;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setCsspath(String csspath) {
-        this.csspath = csspath;
-    }
-    
-    public Contentpage getContentpage() {
-        return contentpage;
+    public String getCssurl() {
+        return cssurl;
     }
 
-    public void setContentpage(Contentpage contentpage) {
-        this.contentpage = contentpage;
+    public Contentcss cssurl(String cssurl) {
+        this.cssurl = cssurl;
+        return this;
+    }
+
+    public void setCssurl(String cssurl) {
+        this.cssurl = cssurl;
+    }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Contentcss)) {
+            return false;
+        }
+        return id != null && id.equals(((Contentcss) o).id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
+
+    // prettier-ignore
+    @Override
+    public String toString() {
+        return "Contentcss{" +
+            "id=" + getId() +
+            ", name='" + getName() + "'" +
+            ", cssurl='" + getCssurl() + "'" +
+            "}";
     }
 }

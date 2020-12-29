@@ -13,9 +13,14 @@
                     <span>{{ contentpage.title }}</span>
                 </dd>
                 <dt><span jhiTranslate="froalaApp.contentpage.contenthtml">Contenthtml</span></dt>
-                <dd class="froala" [outerHTML]='secureCntent(contentpage.contenthtml)'>
-                    <!-- <span>{{ contentpage.contenthtml }}</span>
-                    <span [innerHTML]='contentpage.contenthtml'></span> -->
+                <dd>
+                    <span>{{ contentpage.contenthtml }}</span>
+                </dd>
+                <dt><span jhiTranslate="froalaApp.contentpage.contentcss">Contentcss</span></dt>
+                <dd>
+                    <div *ngIf="contentpage.contentcss">
+                        <a [routerLink]="['/contentcss', contentpage.contentcss?.id, 'view']">{{ contentpage.contentcss?.name }}</a>
+                    </div>
                 </dd>
             </dl>
 

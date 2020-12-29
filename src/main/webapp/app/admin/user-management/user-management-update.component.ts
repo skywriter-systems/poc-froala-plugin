@@ -40,7 +40,6 @@ export class UserManagementUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(({ user }) => {
       if (user) {
-        console.log(user);
         this.user = user;
         if (this.user.id === undefined) {
           this.user.activated = true;
@@ -50,7 +49,6 @@ export class UserManagementUpdateComponent implements OnInit {
     });
     this.userService.authorities().subscribe(authorities => {
       this.authorities = authorities;
-      console.log(authorities);
     });
   }
 

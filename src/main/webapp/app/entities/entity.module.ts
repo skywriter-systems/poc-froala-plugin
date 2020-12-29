@@ -5,6 +5,10 @@ import { RouterModule } from '@angular/router';
   imports: [
     RouterModule.forChild([
       {
+        path: 'contentcss',
+        loadChildren: () => import('./contentcss/contentcss.module').then(m => m.FroalaContentcssModule),
+      },
+      {
         path: 'contentpage',
         loadChildren: () => import('./contentpage/contentpage.module').then(m => m.FroalaContentpageModule),
       },

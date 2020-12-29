@@ -1,0 +1,23 @@
+{
+  "froalaApp": {
+    "contentcss": {
+      "home": {
+        "title": "Contentcsses",
+        "createLabel": "Create a new Contentcss",
+        "createOrEditLabel": "Create or edit a Contentcss",
+        "notFound": "No Contentcsses found"
+      },
+      "created": "A new Contentcss is created with identifier {{ param }}",
+      "updated": "A Contentcss is updated with identifier {{ param }}",
+      "deleted": "A Contentcss is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Contentcss {{ id }}?"
+      },
+      "detail": {
+        "title": "Contentcss"
+      },
+      "name": "Name",
+      "cssurl": "Cssurl"
+    }
+  }
+}

@@ -32,6 +32,8 @@ export class ContentpageUpdatePage {
   titleInput = element(by.id('field_title'));
   contenthtmlInput = element(by.id('field_contenthtml'));
 
+  contentcssSelect = element(by.id('field_contentcss'));
+
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
@@ -50,6 +52,22 @@ export class ContentpageUpdatePage {
 
   async getContenthtmlInput(): Promise<string> {
     return await this.contenthtmlInput.getAttribute('value');
+  }
+
+  async contentcssSelectLastOption(): Promise<void> {
+    await this.contentcssSelect.all(by.tagName('option')).last().click();
+  }
+
+  async contentcssSelectOption(option: string): Promise<void> {
+    await this.contentcssSelect.sendKeys(option);
+  }
+
+  getContentcssSelect(): ElementFinder {
+    return this.contentcssSelect;
+  }
+
+  async getContentcssSelectedOption(): Promise<string> {
+    return await this.contentcssSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

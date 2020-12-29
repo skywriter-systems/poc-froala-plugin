@@ -48,6 +48,7 @@ public class CacheConfiguration {
             createCache(cm, com.innvo.domain.User.class.getName());
             createCache(cm, com.innvo.domain.Authority.class.getName());
             createCache(cm, com.innvo.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.innvo.domain.Contentcss.class.getName());
             createCache(cm, com.innvo.domain.Contentpage.class.getName());
             // jhipster-needle-ehcache-add-entry
         };

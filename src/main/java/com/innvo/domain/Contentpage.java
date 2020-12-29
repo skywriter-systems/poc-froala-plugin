@@ -1,16 +1,13 @@
 package com.innvo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.List;
 
 /**
  * A Contentpage.
@@ -34,22 +31,9 @@ public class Contentpage implements Serializable {
     @Column(name = "contenthtml")
     private String contenthtml;
 
-    @Column(name = "contenthtmllink")
-    private String contenthtmllink;
-
-    @OneToMany(mappedBy = "contentpage", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "contentpage_css", joinColumns = {@JoinColumn(name = "contentpage_id")},
-//        inverseJoinColumns = {@JoinColumn(name = "contentcss_id")})
-    private List<Contentcss> contentcss;
-
-    public String getContenthtmllink() {
-        return contenthtmllink;
-    }
-
-    public void setContenthtmllink(String contenthtmllink) {
-        this.contenthtmllink = contenthtmllink;
-    }
+    @ManyToOne
+    @JsonIgnoreProperties(value = "contentpages", allowSetters = true)
+    private Contentcss contentcss;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -82,16 +66,21 @@ public class Contentpage implements Serializable {
         return this;
     }
 
-    public List<Contentcss> getContentcss() {
+    public void setContenthtml(String contenthtml) {
+        this.contenthtml = contenthtml;
+    }
+
+    public Contentcss getContentcss() {
         return contentcss;
     }
 
-    public void setContentcss(List<Contentcss> contentcss) {
+    public Contentpage contentcss(Contentcss contentcss) {
         this.contentcss = contentcss;
+        return this;
     }
 
-    public void setContenthtml(String contenthtml) {
-        this.contenthtml = contenthtml;
+    public void setContentcss(Contentcss contentcss) {
+        this.contentcss = contentcss;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

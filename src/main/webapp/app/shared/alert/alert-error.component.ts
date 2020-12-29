@@ -111,7 +111,7 @@ export class AlertErrorComponent implements OnDestroy {
       scoped: true,
     };
 
-    //this.alerts.push(this.alertService.addAlert(newAlert, this.alerts));
+    this.alerts.push(this.alertService.addAlert(newAlert, this.alerts));
   }
 
   close(alert: JhiAlert): void {

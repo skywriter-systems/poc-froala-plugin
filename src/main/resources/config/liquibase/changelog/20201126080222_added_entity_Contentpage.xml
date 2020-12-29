@@ -18,19 +18,15 @@
             <column name="title" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="contenthtml" type="varchar(10000)">
+            <column name="contenthtml" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="contentcss_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
-
-    <changeSet id="add-contenthtmllink" author="ahmed">
-        <addColumn tableName="contentpage">
-            <column name="contenthtmllink" type="varchar(10000)"></column>
-        </addColumn>
-    </changeSet>
-
 
     <changeSet id="20201126080222-1-relations" author="jhipster">
 
