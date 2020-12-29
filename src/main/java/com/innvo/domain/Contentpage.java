@@ -1,5 +1,6 @@
 package com.innvo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -29,6 +30,10 @@ public class Contentpage implements Serializable {
 
     @Column(name = "contenthtml")
     private String contenthtml;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "contentpagechildren", allowSetters = true)
+    private Contentpage contentpageparent;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -63,6 +68,19 @@ public class Contentpage implements Serializable {
 
     public void setContenthtml(String contenthtml) {
         this.contenthtml = contenthtml;
+    }
+
+    public Contentpage getContentpageparent() {
+        return contentpageparent;
+    }
+
+    public Contentpage contentpageparent(Contentpage contentpage) {
+        this.contentpageparent = contentpage;
+        return this;
+    }
+
+    public void setContentpageparent(Contentpage contentpage) {
+        this.contentpageparent = contentpage;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

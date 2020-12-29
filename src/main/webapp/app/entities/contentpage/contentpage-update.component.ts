@@ -14,11 +14,13 @@ import { ContentpageService } from './contentpage.service';
 })
 export class ContentpageUpdateComponent implements OnInit {
   isSaving = false;
+  contentpages: IContentpage[] = [];
 
   editForm = this.fb.group({
     id: [],
     title: [null, [Validators.required]],
     contenthtml: [],
+    contentpageparent: [],
   });
 
   constructor(protected contentpageService: ContentpageService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -26,6 +28,8 @@ export class ContentpageUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ contentpage }) => {
       this.updateForm(contentpage);
+
+      this.contentpageService.query().subscribe((res: HttpResponse<IContentpage[]>) => (this.contentpages = res.body || []));
     });
   }
 
@@ -34,6 +38,7 @@ export class ContentpageUpdateComponent implements OnInit {
       id: contentpage.id,
       title: contentpage.title,
       contenthtml: contentpage.contenthtml,
+      contentpageparent: contentpage.contentpageparent,
     });
   }
 
@@ -57,6 +62,7 @@ export class ContentpageUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       title: this.editForm.get(['title'])!.value,
       contenthtml: this.editForm.get(['contenthtml'])!.value,
+      contentpageparent: this.editForm.get(['contentpageparent'])!.value,
     };
   }
 
@@ -74,5 +80,9 @@ export class ContentpageUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: IContentpage): any {
+    return item.id;
   }
 }

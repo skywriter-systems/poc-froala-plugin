@@ -25,6 +25,7 @@
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="title"><span jhiTranslate="froalaApp.contentpage.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="contenthtml"><span jhiTranslate="froalaApp.contentpage.contenthtml">Contenthtml</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="contentpageparent.title"><span jhiTranslate="froalaApp.contentpage.contentpageparent">Contentpageparent</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -33,6 +34,11 @@
                     <td><a [routerLink]="['/contentpage', contentpage.id, 'view']">{{ contentpage.id }}</a></td>
                     <td>{{ contentpage.title }}</td>
                     <td>{{ contentpage.contenthtml }}</td>
+                    <td>
+                        <div *ngIf="contentpage.contentpageparent">
+                            <a [routerLink]="['/contentpage', contentpage.contentpageparent?.id, 'view']" >{{ contentpage.contentpageparent?.title }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

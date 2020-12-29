@@ -28,6 +28,14 @@
                     <input type="text" class="form-control" name="contenthtml" id="field_contenthtml"
                            formControlName="contenthtml"/>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="froalaApp.contentpage.contentpageparent" for="field_contentpageparent">Contentpageparent</label>
+                    <select class="form-control" id="field_contentpageparent" name="contentpageparent" formControlName="contentpageparent">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contentpageOption.id === editForm.get('contentpageparent')!.value?.id ? editForm.get('contentpageparent')!.value : contentpageOption" *ngFor="let contentpageOption of contentpages; trackBy: trackById">{{ contentpageOption.title }}</option>
+                    </select>
+                </div>
             </div>
 
             <div>

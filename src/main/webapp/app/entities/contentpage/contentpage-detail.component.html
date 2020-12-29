@@ -16,6 +16,12 @@
                 <dd>
                     <span>{{ contentpage.contenthtml }}</span>
                 </dd>
+                <dt><span jhiTranslate="froalaApp.contentpage.contentpageparent">Contentpageparent</span></dt>
+                <dd>
+                    <div *ngIf="contentpage.contentpageparent">
+                        <a [routerLink]="['/contentpage', contentpage.contentpageparent?.id, 'view']">{{ contentpage.contentpageparent?.title }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
