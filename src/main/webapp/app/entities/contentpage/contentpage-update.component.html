@@ -2,8 +2,6 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-contentpage-heading" jhiTranslate="froalaApp.contentpage.home.createOrEditLabel">Create or edit a Contentpage</h2>
-                <!-- Added Froala Editor Test Case -->
-                <div id="edit" [froalaEditor]>Hello, Froala!</div>
             <div>
                 <jhi-alert-error></jhi-alert-error>
 
@@ -27,7 +25,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="froalaApp.contentpage.contenthtml" for="field_contenthtml">Contenthtml</label>
                     <textarea type="text" class="form-control" name="contenthtml" id="field_contenthtml"
-                    [froalaEditor] formControlName="contenthtml"></textarea>
+                    [froalaEditor]='options' formControlName="contenthtml"></textarea>
                 </div>
 
                 <div class="form-group">

@@ -14,6 +14,11 @@ import { ContentpageService } from './contentpage.service';
 })
 export class ContentpageUpdateComponent implements OnInit {
   isSaving = false;
+  public options: Object = {
+    placeholderText: 'Edit Your Content Here!',
+    charCounterCount: false,
+    toolbarButtons: ['italic'],
+  };
   contentpages: IContentpage[] = [];
 
   editForm = this.fb.group({
